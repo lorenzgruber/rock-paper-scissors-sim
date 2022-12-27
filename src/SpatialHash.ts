@@ -111,17 +111,14 @@ export class SpatialHash {
       )
       .forEach((gridCell) => discinctGridCells.add(gridCell.join(",")));
 
-    let ponitsToCheck = 0;
     let collidingPoints: Point[] = [];
     discinctGridCells.forEach((gridCellString) => {
       const gridCell: number[] = gridCellString.split(",").map((str) => +str);
       const bucket = this.grid[gridCell[0]][gridCell[1]];
-      ponitsToCheck += bucket.length;
       collidingPoints = collidingPoints.concat(
         bucket.filter((pointToCheck) => point.checkCollision(pointToCheck))
       );
     });
-    //console.log(ponitsToCheck);
     return collidingPoints;
   }
 
@@ -136,8 +133,6 @@ export class SpatialHash {
   }
 
   private getGridCell(x: number, y: number): number[] {
-    const xCell = Math.floor(x / this.cellSize);
-    const yCell = Math.floor(y / this.cellSize);
     return [Math.floor(x / this.cellSize), Math.floor(y / this.cellSize)];
   }
 
