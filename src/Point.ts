@@ -41,16 +41,6 @@ export class Point {
   }
 
   update(preyPoints: SpatialHash, hunterPoints: SpatialHash): void {
-    // const moveVector
-    // get the nearest prey and hunter
-    // if the prey is closer, move towards it
-    // => get the vector to the prey-point and save it to moveVecotr
-    // if the hunter is closer, run away from it
-    // => get the vector to the hunter-point and multiply it by -1 and save it to moveVector
-    // get the unit-vector of moveVector and multiply it by this.speed
-    // create a new Vector with random coordinates ranging from 0 to this.wiggle and add it to moveVector
-    // add moveVector to this.x and this.y
-
     let moveVector: Vector;
 
     const nearestPrey = preyPoints.findNearestPoint(this.x, this.y);
@@ -85,36 +75,6 @@ export class Point {
     } else {
       moveVector = new Vector(0, 0);
     }
-    // if (distanceToPrey < distanceToHunter) {
-    //   moveVector = vectorToPrey!;
-    //   moveVector.multiply(-1);
-    // } else if (distanceToPrey > distanceToHunter) {
-    //   moveVector = vectorToHunter!;
-    // } else {
-    //   moveVector = new Vector(0, 0);
-    // }
-
-    // if (nearestPrey) {
-    //   moveVector = Vector.getVectorBetweenPoints(
-    //     this.x,
-    //     this.y,
-    //     nearestPrey.x,
-    //     nearestPrey.y
-    //   );
-    //   moveVector.multiply(-1);
-    // } else {
-    //   const nearestHunter = hunterPoints.findNearestPoint(this.x, this.y);
-    //   if (nearestHunter) {
-    //     moveVector = Vector.getVectorBetweenPoints(
-    //       this.x,
-    //       this.y,
-    //       nearestHunter.x,
-    //       nearestHunter.y
-    //     );
-    //   } else {
-    //     moveVector = new Vector(0, 0);
-    //   }
-    // }
 
     moveVector = moveVector.getUnitVector();
     moveVector.multiply(this.speed);

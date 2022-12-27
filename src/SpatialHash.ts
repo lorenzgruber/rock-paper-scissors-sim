@@ -121,7 +121,7 @@ export class SpatialHash {
         bucket.filter((pointToCheck) => point.checkCollision(pointToCheck))
       );
     });
-    console.log(ponitsToCheck);
+    //console.log(ponitsToCheck);
     return collidingPoints;
   }
 
