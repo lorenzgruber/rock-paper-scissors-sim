@@ -2,7 +2,7 @@ import { Vector } from "./Vector";
 import { v4 as uuidv4 } from "uuid";
 import { SpatialHash } from "./SpatialHash";
 
-export type RockPaperScissorsType = "🪨" | "📄" | "✂️";
+export type RockPaperScissorsType = "🗿" | "📄" | "✂️";
 
 export type BoundingBox = {
   x1: number;

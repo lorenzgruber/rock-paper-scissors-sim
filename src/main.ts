@@ -24,7 +24,7 @@ ctx.shadowColor = "rgba(0,0,0,0.15)";
 ctx.shadowBlur = 5;
 ctx.shadowOffsetY = 5;
 
-const rockCountElement = document.querySelector<HTMLSpanElement>("#🪨")!;
+const rockCountElement = document.querySelector<HTMLSpanElement>("#🗿")!;
 const paperCountElement = document.querySelector<HTMLSpanElement>("#📄")!;
 const scissorsCountElement = document.querySelector<HTMLSpanElement>("#✂️")!;
 const restartButton = document.querySelector<HTMLButtonElement>("#restart")!;
@@ -54,7 +54,7 @@ function update(): void {
     // update positions of all points
     allPoints.forEach((point) => {
       switch (point.type) {
-        case "🪨":
+        case "🗿":
           updatePointPosition(point, scissors, papers, rocks);
           break;
         case "📄":
@@ -70,7 +70,7 @@ function update(): void {
 
     allPoints.forEach((point) => {
       switch (point.type) {
-        case "🪨":
+        case "🗿":
           updatePointCollisions(point, scissors, rocks);
           break;
         case "📄":
@@ -84,7 +84,7 @@ function update(): void {
       }
     });
 
-    rockCountElement.innerText = `🪨 ${rocks.getFlattenedList().length}`;
+    rockCountElement.innerText = `🗿 ${rocks.getFlattenedList().length}`;
     paperCountElement.innerText = `📄 ${papers.getFlattenedList().length}`;
     scissorsCountElement.innerText = `✂️ ${scissors.getFlattenedList().length}`;
 
@@ -140,7 +140,7 @@ function render(allPoints: Point[]): void {
 update();
 
 function initializeRockPaperScissors(): void {
-  rocks = new SpatialHash(gridSize, canvasSize, generatePoints("🪨"));
+  rocks = new SpatialHash(gridSize, canvasSize, generatePoints("🗿"));
   papers = new SpatialHash(gridSize, canvasSize, generatePoints("📄"));
   scissors = new SpatialHash(gridSize, canvasSize, generatePoints("✂️"));
 }
