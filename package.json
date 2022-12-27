@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
+    "build:prod": "tsc && vite build --base=/rock-paper-scissors-sim/",
     "preview": "vite preview"
   },
   "devDependencies": {
