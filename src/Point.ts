@@ -1,4 +1,4 @@
-import { Vector } from "./vector";
+import { Vector } from "./Vector";
 import { v4 as uuidv4 } from "uuid";
 import { SpatialHash } from "./SpatialHash";
 

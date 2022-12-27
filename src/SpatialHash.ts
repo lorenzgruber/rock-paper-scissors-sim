@@ -1,5 +1,5 @@
 import { Point } from "./Point";
-import { Vector } from "./vector";
+import { Vector } from "./Vector";
 
 export class SpatialHash {
   grid: Point[][][];
