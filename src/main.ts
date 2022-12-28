@@ -28,17 +28,21 @@ ctx.shadowColor = "rgba(0,0,0,0.15)";
 ctx.shadowBlur = 5;
 ctx.shadowOffsetY = 5;
 
-const rockCountElement = document.querySelector<HTMLSpanElement>("#🗿")!;
-const paperCountElement = document.querySelector<HTMLSpanElement>("#📄")!;
-const scissorsCountElement = document.querySelector<HTMLSpanElement>("#✂️")!;
-const restartButton = document.querySelector<HTMLButtonElement>("#restart")!;
-restartButton.addEventListener("click", initializeRockPaperScissors);
-
 let rocks: SpatialHash;
 let papers: SpatialHash;
 let scissors: SpatialHash;
 
 initializeRockPaperScissors();
+
+const rockCountElement = document.querySelector<HTMLSpanElement>("#🗿")!;
+const paperCountElement = document.querySelector<HTMLSpanElement>("#📄")!;
+const scissorsCountElement = document.querySelector<HTMLSpanElement>("#✂️")!;
+let lastRockCount = rocks!.size;
+let lastPaperCount = papers!.size;
+let lastScissorsCount = scissors!.size;
+
+const restartButton = document.querySelector<HTMLButtonElement>("#restart")!;
+restartButton.addEventListener("click", initializeRockPaperScissors);
 
 let lastRender: number | null = null;
 const timeBetweenRenders = 1000 / fps;
@@ -89,9 +93,18 @@ function update(): void {
       }
     });
 
-    rockCountElement.innerText = `🗿 ${rocks.size}`;
-    paperCountElement.innerText = `📄 ${papers.size}`;
-    scissorsCountElement.innerText = `✂️ ${scissors.size}`;
+    if (lastRockCount !== rocks.size) {
+      rockCountElement.innerText = `🗿 ${rocks.size}`;
+      lastRockCount = rocks.size;
+    }
+    if (lastPaperCount !== papers.size) {
+      paperCountElement.innerText = `📄 ${papers.size}`;
+      lastPaperCount = papers.size;
+    }
+    if (lastScissorsCount !== scissors.size) {
+      scissorsCountElement.innerText = `✂️ ${scissors.size}`;
+      lastScissorsCount = scissors.size;
+    }
 
     render(allPoints);
   }
@@ -136,7 +149,6 @@ function render(allPoints: Point[]): void {
 
   ctx.shadowColor = "rgba(0,0,0,0.15)";
   allPoints.forEach((point) => {
-    //ctx.strokeRect(point.x, point.y, point.size, point.size);
     ctx.fillText(point.type, point.x, point.y + point.size);
   });
 }
