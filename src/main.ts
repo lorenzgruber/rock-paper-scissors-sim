@@ -3,11 +3,15 @@
 import { Point, RockPaperScissorsType } from "./Point";
 import { SpatialHash } from "./SpatialHash";
 
-const canvasSize = 800; // width and height of the canvas in px
+const canvasSize = Math.round(
+  (window.innerHeight > window.innerWidth
+    ? window.innerWidth
+    : window.innerHeight) * 0.75
+); // width and height of the canvas in px
 const gridSize = 10; // amount of rows and colls in the spatial hash grid
-const pointSize = 30; // width and height of each point in px
-const pointSpeed = 3; // speed at which each point moves
-const pointWiggle = 1; // amount of random wiggle each point experiences
+const pointSize = canvasSize * 0.04; // width and height of each point in px
+const pointSpeed = pointSize / 10; // speed at which each point moves
+const pointWiggle = pointSpeed / 3; // amount of random wiggle each point experiences
 const initialPointsPerType = 50; // initial amount of points for each type (i.e Rock, Paper, Scissors)
 const fps = 60; // frame rate of the simulation
 
