@@ -5,6 +5,7 @@ export class SpatialHash {
   grid: Point[][][];
   cellSize: number;
   gridSize: number;
+  size: number;
 
   constructor(gridSize: number, canvasSize: number, points: Point[]) {
     this.grid = Array.from({ length: gridSize }, () =>
@@ -12,6 +13,7 @@ export class SpatialHash {
     );
     this.cellSize = canvasSize / gridSize;
     this.gridSize = gridSize;
+    this.size = 0;
 
     points.forEach((point) => this.add(point));
   }
@@ -20,6 +22,7 @@ export class SpatialHash {
     const gridCell = this.getGridCell(point.x, point.y);
     const bucket = this.grid[gridCell[0]][gridCell[1]];
     bucket.push(point);
+    this.size++;
   }
 
   remove(point: Point): void {
@@ -28,6 +31,7 @@ export class SpatialHash {
     this.grid[gridCell[0]][gridCell[1]] = bucket.filter(
       (p) => p.id !== point.id
     );
+    this.size--;
   }
 
   updatePoint(point: Point, oldX: number, oldY: number): void {
@@ -46,7 +50,7 @@ export class SpatialHash {
   }
 
   findNearestPoint(x: number, y: number): Point | null {
-    if (this.getFlattenedList().length === 0) return null;
+    if (this.size === 0) return null;
 
     let searchRadius = 0;
     const sourceGridCell = this.getGridCell(x, y);
@@ -115,8 +119,8 @@ export class SpatialHash {
     discinctGridCells.forEach((gridCellString) => {
       const gridCell: number[] = gridCellString.split(",").map((str) => +str);
       const bucket = this.grid[gridCell[0]][gridCell[1]];
-      collidingPoints = collidingPoints.concat(
-        bucket.filter((pointToCheck) => point.checkCollision(pointToCheck))
+      collidingPoints.push(
+        ...bucket.filter((pointToCheck) => point.checkCollision(pointToCheck))
       );
     });
     return collidingPoints;
@@ -126,7 +130,7 @@ export class SpatialHash {
     let flattenedList: Point[] = [];
     for (let i = 0; i < this.gridSize; i++) {
       for (let j = 0; j < this.gridSize; j++) {
-        flattenedList = flattenedList.concat(this.grid[i][j]);
+        flattenedList.push(...this.grid[i][j]);
       }
     }
     return flattenedList;

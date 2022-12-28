@@ -50,10 +50,11 @@ function update(): void {
   requestAnimationFrame(update);
 
   if (elapsedTime === null || elapsedTime > timeBetweenRenders) {
-    const allPoints: Point[] = new Array()
-      .concat(rocks.getFlattenedList())
-      .concat(papers.getFlattenedList())
-      .concat(scissors.getFlattenedList());
+    const allPoints: Point[] = [
+      ...rocks.getFlattenedList(),
+      ...papers.getFlattenedList(),
+      ...scissors.getFlattenedList(),
+    ];
 
     // update positions of all points
     allPoints.forEach((point) => {
@@ -88,9 +89,9 @@ function update(): void {
       }
     });
 
-    rockCountElement.innerText = `🗿 ${rocks.getFlattenedList().length}`;
-    paperCountElement.innerText = `📄 ${papers.getFlattenedList().length}`;
-    scissorsCountElement.innerText = `✂️ ${scissors.getFlattenedList().length}`;
+    rockCountElement.innerText = `🗿 ${rocks.size}`;
+    paperCountElement.innerText = `📄 ${papers.size}`;
+    scissorsCountElement.innerText = `✂️ ${scissors.size}`;
 
     render(allPoints);
   }
